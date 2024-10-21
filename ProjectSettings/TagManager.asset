@@ -8,6 +8,7 @@ TagManager:
   - Runway
   - Airplane
   - Fuel
+  - WindArea
   layers:
   - Default
   - TransparentFX

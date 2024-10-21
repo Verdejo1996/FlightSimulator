@@ -20,6 +20,8 @@ public class AirPlane_Controller : MonoBehaviour
     public Slider speedSlider;
     public Slider fuelSlider;
 
+    public GameObject windZone;
+
     public GameObject leftWingFlap;
     public GameObject rightWingFlap;
 
@@ -30,7 +32,7 @@ public class AirPlane_Controller : MonoBehaviour
     public GameObject[] propellers;
 
     float goingUp, rotateRight, slideRight, dynamicLift, fallRate, glideRate;
-    bool isGrounded, isMovingForward;
+    bool isGrounded, isMovingForward, inWindZone = false;
 
     float speedIncrement = 0f;
     float previousSpeedIncrement;
@@ -273,6 +275,11 @@ public class AirPlane_Controller : MonoBehaviour
         {
             propellers[i].transform.Rotate(0, 0, (speed * 5f) + 3f);
         }
+
+        if (inWindZone)
+        {
+            rb.AddForce(windZone.GetComponent<WindArea>().direction * windZone.GetComponent<WindArea>().strength);
+        }
     }
 
     public void GoUpDown(float v)
@@ -373,6 +380,20 @@ public class AirPlane_Controller : MonoBehaviour
         else
         {
             ConsumeFuel();
+        }
+
+        if(other.gameObject.tag == "WindArea")
+        {
+            windZone = other.gameObject;
+            inWindZone = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "WindArea")
+        {
+            inWindZone = false;
         }
     }
 
