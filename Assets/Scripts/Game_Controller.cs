@@ -33,12 +33,14 @@ public class Game_Controller : MonoBehaviour
                 winText.gameObject.SetActive(true);
                 win = true;
                 Hud_Controller.gameEnd = true;
+                OnGameOver();
             }
         }
         else
         {
             loseText.gameObject.SetActive(true);
             Hud_Controller.gameEnd = true;
+            OnGameOver();
         }
     }
 
@@ -51,5 +53,10 @@ public class Game_Controller : MonoBehaviour
                 landedCount++;
             }
         }
+    }
+
+    private void OnGameOver()
+    {
+        FindObjectOfType<Save_Manager>().MostarBtnGuardar();
     }
 }

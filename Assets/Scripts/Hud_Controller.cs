@@ -13,6 +13,7 @@ public class Hud_Controller : MonoBehaviour
 
     public Transform target;
 
+    public Text nombrePartida;
     public Text finalTimeText; // Texto para el tiempo total
     public Text averageHeightText; // Texto para la altura promedio
     public Text finalScoreText; // Texto para el puntaje final

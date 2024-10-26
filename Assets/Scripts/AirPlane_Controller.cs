@@ -20,7 +20,7 @@ public class AirPlane_Controller : MonoBehaviour
     public Slider speedSlider;
     public Slider fuelSlider;
 
-    public GameObject windZone;
+    //public GameObject windZone;
 
     public GameObject leftWingFlap;
     public GameObject rightWingFlap;
@@ -32,7 +32,7 @@ public class AirPlane_Controller : MonoBehaviour
     public GameObject[] propellers;
 
     float goingUp, rotateRight, slideRight, dynamicLift, fallRate, glideRate;
-    bool isGrounded, isMovingForward, inWindZone = false;
+    bool isGrounded, isMovingForward; //inWindZone = false;
 
     float speedIncrement = 0f;
     float previousSpeedIncrement;
@@ -63,29 +63,41 @@ public class AirPlane_Controller : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isMovingForward)
+/*        if (isMovingForward)
         {
             speed += speedIncrement * Time.deltaTime;
         }
         else
         {
-            speed -= maxSpeedIncrement * Time.deltaTime;
-        }
+            speed -= speed * Time.deltaTime;
+        }*/
 
         speed = Mathf.Clamp(speed, 0f, topSpeed);
 
         //transform.Translate(0, 0, (speed + (glideRate*10)) * Time.deltaTime);
 
-        if(speed > 0f)
+        /*        if(Input.GetKey(KeyCode.Space))
+                {
+                    transform.Translate(0, 0, (speed + (glideRate * 25)) * Time.deltaTime);
+                }
+                else if(speed == 0)
+                {
+                    transform.Translate(0, 0, 0);
+                }*/
+        if(speed > 5)
+        {
+            transform.Translate(0, 0, speed * Time.deltaTime);
+        }
+        else if (speed > 10)
         {
             transform.Translate(0, 0, (speed + (glideRate * 25)) * Time.deltaTime);
         }
-        else if(speed == 0)
+/*        else if (speed == 0)
         {
             transform.Translate(0, 0, 0);
-        }
+        }*/
 
-        if(isGrounded)
+        if (isGrounded)
         {
             //Rotamos el transform para que levante la nariz del avion y pueda volar.
             transform.Rotate(dynamicLift, 0, 0);
@@ -104,11 +116,17 @@ public class AirPlane_Controller : MonoBehaviour
         //Aceleracion y desaceleracion
         if (Input.GetKey(KeyCode.Space))
         {
-            speedSlider.value += 0.01f;
+            speedSlider.value += 0.005f;
+            speed += speedIncrement * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.P))
         {
-            speedSlider.value -= 0.001f;
+            speedSlider.value -= 0.005f;
+            speed -= maxSpeedIncrement * Time.deltaTime;
+            if (speed == 0)
+            {
+                transform.Translate(0, 0, 0);
+            }
         }
         //Down
         if (Input.GetKey(KeyCode.W) || goingUp > 0f)
@@ -208,22 +226,26 @@ public class AirPlane_Controller : MonoBehaviour
         //SlideLeft
         else if (Input.GetKey(KeyCode.Q) || slideRight < 0f)
         {
-            if (tailFlap1.transform.localEulerAngles.y < 45 || tailFlap1.transform.localEulerAngles.y > 180)
+            if (speed > 5)
             {
-                tailFlap1.transform.Rotate(0, flapSpeed, 0);
+                if (tailFlap1.transform.localEulerAngles.y < 45 || tailFlap1.transform.localEulerAngles.y > 180)
+                {
+                    tailFlap1.transform.Rotate(0, flapSpeed, 0);
+                }
+                transform.Rotate(0, -0.5f, 0);
             }
-
-            transform.Rotate(0, -0.5f, 0);
         }
         //SlideRight
         else if (Input.GetKey(KeyCode.E) || slideRight > 0f)
         {
-            if (tailFlap1.transform.localEulerAngles.y > 315 || tailFlap1.transform.localEulerAngles.y < 180)
+            if (speed > 5)
             {
-                tailFlap1.transform.Rotate(0, -flapSpeed, 0);
+                if (tailFlap1.transform.localEulerAngles.y > 315 || tailFlap1.transform.localEulerAngles.y < 180)
+                {
+                    tailFlap1.transform.Rotate(0, -flapSpeed, 0);
+                }
+                transform.Rotate(0, 0.5f, 0);
             }
-
-            transform.Rotate(0, 0.5f, 0);
         }
         else
         {
@@ -276,10 +298,10 @@ public class AirPlane_Controller : MonoBehaviour
             propellers[i].transform.Rotate(0, 0, (speed * 5f) + 3f);
         }
 
-        if (inWindZone)
+/*        if (inWindZone)
         {
             rb.AddForce(windZone.GetComponent<WindArea>().direction * windZone.GetComponent<WindArea>().strength);
-        }
+        }*/
     }
 
     public void GoUpDown(float v)
@@ -316,6 +338,11 @@ public class AirPlane_Controller : MonoBehaviour
 
         fallRate = 1f - speedSlider.value;
 
+        if(speed < 5)
+        {
+            fallRate = 1f;
+        }
+
         if(!isGrounded)
         {
             glideRate = 1f - speedSlider.value;
@@ -344,6 +371,10 @@ public class AirPlane_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.tag == "Runway")
+        {
+            isGrounded = true;
+        }
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "EndMap")
         {
             isGrounded = true;
@@ -382,19 +413,19 @@ public class AirPlane_Controller : MonoBehaviour
             ConsumeFuel();
         }
 
-        if(other.gameObject.tag == "WindArea")
+/*        if(other.gameObject.tag == "WindArea")
         {
             windZone = other.gameObject;
             inWindZone = true;
-        }
+        }*/
     }
 
-    private void OnTriggerExit(Collider other)
+/*    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "WindArea")
         {
             inWindZone = false;
         }
-    }
+    }*/
 
 }
