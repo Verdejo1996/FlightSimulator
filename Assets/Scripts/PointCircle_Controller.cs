@@ -21,10 +21,11 @@ public class PointCircle_Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Airplane"))
+        if (other.CompareTag("Airplane"))
         {
             points++;
             Hud_Controller.AddScore(points);
+            Debug.Log(points);
         }
     }
 }

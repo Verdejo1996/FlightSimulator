@@ -13,24 +13,27 @@ public class Sun_Controller : MonoBehaviour
 
     private float timeElapsed = 0f;
 
+    // Desplazamiento inicial para que comience de día (0 = medianoche, 0.25 = amanecer, 0.5 = mediodía)
+    public float initialProgress = 0.25f;
+
     void Update()
     {
         // Avanzar el tiempo del ciclo
         timeElapsed += Time.deltaTime;
 
-        // Calcular el progreso del día (valor entre 0 y 1)
-        float dayProgress = (timeElapsed / dayDuration) % 1;
+        // Calcular el progreso del ciclo de día (valor entre 0 y 1)
+        float dayProgress = (timeElapsed / dayDuration + initialProgress) % 1;
 
-        // Ajustar la rotación del sol (modificamos para un ciclo más realista)
-        sun.transform.localRotation = Quaternion.Euler((dayProgress * 360f) - 90f, 0f, 0f);
+        // Rotar el Sol para que siga el ciclo del día y la noche
+        sun.transform.localRotation = Quaternion.Euler(dayProgress * 360f - 90f, 0f, 0f);
 
-        // Calcular la intensidad de la luz usando el seno, con valores entre min y max
+        // Ajustar la intensidad del Sol usando una función seno (suave transición)
         float intensity = Mathf.Lerp(minIntensity, maxIntensity, Mathf.Clamp01(Mathf.Sin(dayProgress * Mathf.PI)));
 
-        // Asignar la intensidad calculada al sol
+        // Aplicar la intensidad calculada
         sun.intensity = intensity;
 
-        // Ajustar el color ambiental del cielo según el gradiente
+        // Ajustar el color del cielo con el gradiente según el progreso del día
         RenderSettings.ambientLight = skyColor.Evaluate(dayProgress);
 
         RenderSettings.fogDensity = Mathf.Lerp(0f, 0.02f, 1f - sun.intensity);
