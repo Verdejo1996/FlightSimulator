@@ -73,6 +73,7 @@ public class Tutorial_Controller : MonoBehaviour
                     break;
             }
         }
+        CirclesTutorial();
     }
 
     IEnumerator ShowNextTutorialStep()
@@ -81,22 +82,28 @@ public class Tutorial_Controller : MonoBehaviour
         switch (stepIndex)
         {
             case 0:
-                tutorialText.text = "Presiona Espacio para Acelerar";
+                tutorialText.text = "Presiona Espacio para Acelerar.";
                 break;
             case 1:
-                tutorialText.text = "Presiona S para mover hacia arriba";
+                tutorialText.text = "Presiona S para mover hacia arriba.";
                 break;
             case 2:
-                tutorialText.text = "Presiona W para mover hacia abajo";
+                tutorialText.text = "Presiona W para mover hacia abajo.";
                 break;
             case 3:
-                tutorialText.text = "Presiona D o E para mover hacia la derecha";
+                tutorialText.text = "Presiona D o E para mover hacia la derecha.";
                 break;
             case 4:
-                tutorialText.text = "Presiona A o Q para mover hacia la izquierda";
+                tutorialText.text = "Presiona A o Q para mover hacia la izquierda.";
                 break;
             case 5:
-                tutorialText.text = "Presiona P para frenar";
+                tutorialText.text = "Presiona P para frenar.";
+                break;
+            case 6:
+                tutorialText.text = "Puedes pasar por el circulo rojo para sumar puntos.";
+                break;
+            case 7:
+                tutorialText.text = "Puedes pasar por el circulo verde para cargar combustible.";
                 break;
         }
 
@@ -105,6 +112,15 @@ public class Tutorial_Controller : MonoBehaviour
 
         stepIndex++;  // Avanzar al siguiente paso
         allowControl = true; // Permitir el control del jugador nuevamente
+    }
+
+    void CirclesTutorial()
+    {
+        if(!isTutorialActive)
+        {
+            allowControl = false;
+            StartCoroutine(ShowNextTutorialStep());
+        }
     }
 
     void EndTutorial()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game_Controller : MonoBehaviour
@@ -22,25 +23,35 @@ public class Game_Controller : MonoBehaviour
     void Update()
     {
         WinCondition();
+        if (SceneManager.GetActiveScene().name == "NivelTutorial")
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                StartCoroutine(NextLevelAfterDelay(1.0f));
+            }
+        }
     }
 
     void WinCondition()
     {
-        if (airplane != null)
+        if(SceneManager.GetActiveScene().name == "Nivel1")
         {
-            if(landedCount == 1)
+            if (airplane != null)
             {
-                winText.gameObject.SetActive(true);
-                win = true;
+                if(landedCount == 1)
+                {
+                    winText.gameObject.SetActive(true);
+                    win = true;
+                    Hud_Controller.gameEnd = true;
+                    OnGameOver();
+                }
+            }
+            else
+            {
+                loseText.gameObject.SetActive(true);
                 Hud_Controller.gameEnd = true;
                 OnGameOver();
             }
-        }
-        else
-        {
-            loseText.gameObject.SetActive(true);
-            Hud_Controller.gameEnd = true;
-            OnGameOver();
         }
     }
 
@@ -51,8 +62,18 @@ public class Game_Controller : MonoBehaviour
             if (collision.collider.CompareTag("Airplane"))
             {
                 landedCount++;
+                if(SceneManager.GetActiveScene().name == "NivelTutorial")
+                {
+                    Hud_Controller.gameEnd = true;
+                }
             }
         }
+    }
+
+    IEnumerator NextLevelAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Nivel1"); ;
     }
 
     private void OnGameOver()

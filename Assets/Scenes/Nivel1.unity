@@ -98,7 +98,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3331f72b6af5e7841bc851ec3efc4b3a,
+    type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -4593,52 +4594,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9024230154891440405}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1348010347
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1348010349}
-  - component: {fileID: 1348010348}
-  m_Layer: 0
-  m_Name: Tutorial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1348010348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348010347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55a1a4ab5f58cd429612ec62cdc7d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialText: {fileID: 1370585034}
-  delayBetweenSteps: 2
---- !u!4 &1348010349
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348010347}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 437.48465, y: 196.8407, z: 7.843095}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355754181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5020,8 +4975,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446590894}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07658192, y: -0.0038541537, z: 0.003102764, w: 0.997051}
-  m_LocalPosition: {x: -1.5161648, y: 7.0082445, z: -38.1006}
+  m_LocalRotation: {x: 0.07658191, y: -0.0038541537, z: 0.0031027645, w: 0.99705106}
+  m_LocalPosition: {x: -1.5161648, y: 7.0082455, z: -38.1006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7734,6 +7689,7 @@ MonoBehaviour:
   averageHeightText: {fileID: 955543561}
   finalScoreText: {fileID: 1689098310}
   distanceTarget: {fileID: 703566204}
+  endTutorial: {fileID: 0}
 --- !u!4 &1999380480
 Transform:
   m_ObjectHideFlags: 0
@@ -8414,13 +8370,12 @@ SceneRoots:
   - {fileID: 1999380480}
   - {fileID: 1859922889}
   - {fileID: 1911058311}
-  - {fileID: 1348010349}
   - {fileID: 956531787}
   - {fileID: 1579024806}
+  - {fileID: 1446590899}
   - {fileID: 1253427496}
   - {fileID: 1017736796}
   - {fileID: 1896079854}
-  - {fileID: 1446590899}
   - {fileID: 768969282}
   - {fileID: 1355754183}
   - {fileID: 320452300}
