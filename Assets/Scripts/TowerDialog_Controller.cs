@@ -36,8 +36,11 @@ public class TowerDialog_Controller : MonoBehaviour
                 if (towerMessage.triggerZone != null)
                 {
                     float distance = Vector3.Distance(player.position, towerMessage.triggerZone.position);
+                    Debug.Log($"Distancia al trigger '{towerMessage.message}': {distance}");
+
                     if (distance <= towerMessage.triggerDistance)
                     {
+                        Debug.Log($"Activando mensaje: {towerMessage.message}");
                         DisplayMessage(towerMessage.message);
                         towerMessage.hasBeenDisplayed = true;  // Marca el mensaje como mostrado
                     }
