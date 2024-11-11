@@ -520,8 +520,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.85353965, b: 0.990566, a: 1}
-  m_Intensity: 5
-  m_Range: 40
+  m_Intensity: 10000
+  m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -602,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 132628980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 972, y: -9.366943, z: 1225}
+  m_LocalPosition: {x: 25, y: -9.366943, z: 1300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -880,7 +880,11 @@ MonoBehaviour:
   messages:
   - message: Cuidado! Zona de turbulencia.
     triggerZone: {fileID: 1358218138}
-    triggerDistance: 50
+    triggerDistance: 100
+    hasBeenDisplayed: 0
+  - message: Cuidado! Zona de turbulencia.
+    triggerZone: {fileID: 589692660}
+    triggerDistance: 100
     hasBeenDisplayed: 0
 --- !u!4 &165559740
 Transform:
@@ -2457,6 +2461,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1579024806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &589692659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 589692660}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &589692660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589692659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 338, y: 11.726476, z: 668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &614233980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2130584502633821043, guid: b5d6e79f6c50e024a833e4d32cc86da1,
@@ -3185,7 +3220,7 @@ Transform:
   m_GameObject: {fileID: 768969279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 19.3, z: 170}
+  m_LocalPosition: {x: 501, y: 19.3, z: 170}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3249,7 +3284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5207,7 +5242,7 @@ Transform:
   m_GameObject: {fileID: 1358218137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 11.726476, z: 108}
+  m_LocalPosition: {x: 319, y: 11.726476, z: 174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6131,6 +6166,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1896079854}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!1 &1527316865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1527316868}
+  - component: {fileID: 1527316867}
+  - component: {fileID: 1527316866}
+  m_Layer: 0
+  m_Name: WindZone (1)
+  m_TagString: WindArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1527316866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527316865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a58b0e7f3900144a91c2e61268ea21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 50
+  direction: {x: 5, y: 10, z: 0}
+  shakeCamera: {fileID: 1446590900}
+--- !u!65 &1527316867
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527316865}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 18.12, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1527316868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527316865}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 337, y: 19.3, z: 781}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541149381
 GameObject:
   m_ObjectHideFlags: 0
@@ -8321,7 +8425,7 @@ Transform:
   m_GameObject: {fileID: 1948165120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1194.7031, y: -34.628204, z: 138.34717}
+  m_LocalPosition: {x: 1194.7031, y: 16, z: 138.34717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8381,8 +8485,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.85353965, b: 0.990566, a: 1}
-  m_Intensity: 5
-  m_Range: 40
+  m_Intensity: 1000
+  m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -8463,7 +8567,7 @@ Transform:
   m_GameObject: {fileID: 1961758035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.58865, y: -4.0149, z: 1486.893}
+  m_LocalPosition: {x: 909, y: -4.0149, z: 1244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8689,6 +8793,7 @@ MonoBehaviour:
   finalTimeText: {fileID: 2010404276}
   averageHeightText: {fileID: 955543561}
   finalScoreText: {fileID: 1689098310}
+  distanceTarget: {fileID: 0}
   endTutorial: {fileID: 0}
 --- !u!4 &1999380480
 Transform:
@@ -9379,11 +9484,13 @@ SceneRoots:
   - {fileID: 1017736796}
   - {fileID: 1896079854}
   - {fileID: 768969282}
+  - {fileID: 1527316868}
   - {fileID: 1355754183}
   - {fileID: 320452300}
   - {fileID: 1563573509}
   - {fileID: 165559740}
   - {fileID: 1358218138}
+  - {fileID: 589692660}
   - {fileID: 475186118}
   - {fileID: 1243944413}
   - {fileID: 132628983}
