@@ -32,45 +32,51 @@ public class CargoMission : MonoBehaviour
     {
         Transform currentTarget = null;
 
-        if (!hasCargo && !headingToFinalObjective)
+        if (player != null)
         {
-            currentTarget = pickupPoint;
-            missionStatusText.text = "Dirígete al punto de recogida.";
-        }
-        else if (hasCargo && !headingToFinalObjective)
-        {
-            currentTarget = deliveryPoint;
-            missionStatusText.text = "Dirígete al punto de entrega.";
-        }
-        else if (!hasCargo && headingToFinalObjective)
-        {
-            currentTarget = finalObjective;
-            missionStatusText.text = "Dirígete al objetivo final para aterrizar.";
-        }
+            if (!hasCargo && !headingToFinalObjective)
+            {
+                currentTarget = pickupPoint;
+                missionStatusText.text = "Dirígete al punto de recogida.";
+            }
+            else if (hasCargo && !headingToFinalObjective)
+            {
+                currentTarget = deliveryPoint;
+                missionStatusText.text = "Dirígete al punto de entrega.";
+            }
+            else if (!hasCargo && headingToFinalObjective)
+            {
+                currentTarget = finalObjective;
+                missionStatusText.text = "Dirígete al objetivo final para aterrizar.";
+            }
 
-        if (currentTarget != null)
-        {
-            float distance = Vector3.Distance(player.position, currentTarget.position);
-            distanceText.text = $"Distancia al objetivo: {distance:F2} m";
+            if (currentTarget != null)
+            {
+                float distance = Vector3.Distance(player.position, currentTarget.position);
+                distanceText.text = $"Distancia al objetivo: {distance:F2} m";
+            }
         }
     }
 
     // Comprobar si el jugador está cerca del punto de recogida para recoger la carga
     void CheckForPickup()
     {
-        if (!hasCargo)
+        if (player != null)
         {
-            float distanceToPickup = Vector3.Distance(player.position, pickupPoint.position);
-
-            if (distanceToPickup <= interactionDistance)
+            if (!hasCargo)
             {
-                missionStatusText.text = "Presiona 'E' para recoger la carga";
+                float distanceToPickup = Vector3.Distance(player.position, pickupPoint.position);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (distanceToPickup <= interactionDistance)
                 {
-                    package.SetActive(false);
-                    hasCargo = true;
-                    missionStatusText.text = "Carga recogida. Dirígete al punto de entrega.";
+                    missionStatusText.text = "Presiona 'E' para recoger la carga";
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        package.SetActive(false);
+                        hasCargo = true;
+                        missionStatusText.text = "Carga recogida. Dirígete al punto de entrega.";
+                    }
                 }
             }
         }
@@ -79,21 +85,24 @@ public class CargoMission : MonoBehaviour
     // Comprobar si el jugador está cerca del punto de entrega para entregar la carga
     void CheckForDelivery()
     {
-        if (hasCargo && !headingToFinalObjective)
+        if (player != null)
         {
-            float distanceToDelivery = Vector3.Distance(player.position, deliveryPoint.position);
-
-            if (distanceToDelivery <= interactionDistance)
+            if (hasCargo && !headingToFinalObjective)
             {
-                missionStatusText.text = "Presiona 'E' para entregar la carga";
+                float distanceToDelivery = Vector3.Distance(player.position, deliveryPoint.position);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (distanceToDelivery <= interactionDistance)
                 {
-                    missionStatusText.text = "Carga entregada. Dirígete al objetivo final para aterrizar.";
-                    package.transform.position = deliveryPoint.position;
-                    package.SetActive(true);
-                    hasCargo = false;
-                    headingToFinalObjective = true;
+                    missionStatusText.text = "Presiona 'E' para entregar la carga";
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        missionStatusText.text = "Carga entregada. Dirígete al objetivo final para aterrizar.";
+                        package.transform.position = deliveryPoint.position;
+                        package.SetActive(true);
+                        hasCargo = false;
+                        headingToFinalObjective = true;
+                    }
                 }
             }
         }

@@ -30,19 +30,22 @@ public class TowerDialog_Controller : MonoBehaviour
     {
         foreach (TowerMessage towerMessage in messages)
         {
-            if (!towerMessage.hasBeenDisplayed)
+            if (player != null && Game_Controller.win == false)
             {
-                // Si tiene una zona de activación
-                if (towerMessage.triggerZone != null)
+                if (!towerMessage.hasBeenDisplayed)
                 {
-                    float distance = Vector3.Distance(player.position, towerMessage.triggerZone.position);
-                    Debug.Log($"Distancia al trigger '{towerMessage.message}': {distance}");
-
-                    if (distance <= towerMessage.triggerDistance)
+                    // Si tiene una zona de activación
+                    if (towerMessage.triggerZone != null)
                     {
-                        Debug.Log($"Activando mensaje: {towerMessage.message}");
-                        DisplayMessage(towerMessage.message);
-                        towerMessage.hasBeenDisplayed = true;  // Marca el mensaje como mostrado
+                        float distance = Vector3.Distance(player.position, towerMessage.triggerZone.position);
+                        Debug.Log($"Distancia al trigger '{towerMessage.message}': {distance}");
+
+                        if (distance <= towerMessage.triggerDistance)
+                        {
+                            Debug.Log($"Activando mensaje: {towerMessage.message}");
+                            DisplayMessage(towerMessage.message);
+                            towerMessage.hasBeenDisplayed = true;  // Marca el mensaje como mostrado
+                        }
                     }
                 }
             }
