@@ -405,8 +405,9 @@ public class AirPlane_Controller : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Fuel"))
         {
-            currentFuel += 5f;
+            currentFuel += 10f;
             fuelSlider.value = currentFuel;
+            other.gameObject.SetActive(false);
         }
         else
         {

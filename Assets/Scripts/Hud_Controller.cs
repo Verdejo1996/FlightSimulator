@@ -20,6 +20,7 @@ public class Hud_Controller : MonoBehaviour
     public Text finalScoreText; // Texto para el puntaje final
     public Text distanceTarget; // Texto para la distancia al objetivo
     public Text endTutorial; // Texto para la distancia al objetivo
+    public Text pointsText;
 
     private float averageHeight;
     private float startTime;
@@ -40,7 +41,9 @@ public class Hud_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(airplane != null && Game_Controller.win == false)
+        pointsText.text = score.ToString();
+
+        if (airplane != null && Game_Controller.win == false)
         {
             AllHud();
         }
@@ -74,7 +77,7 @@ public class Hud_Controller : MonoBehaviour
     // Método para sumar puntos al puntaje
     public static void AddScore(int points)
     {
-        score += points;
+        score += points;       
     }
 
     // Método que se llama al finalizar el juego

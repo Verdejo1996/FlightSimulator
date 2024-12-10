@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class PointCircle_Controller : MonoBehaviour
 {
     private int points;
-    public Text pText;
+    //public Text pText;
+    public GameObject pCircle;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class PointCircle_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pText.text = points.ToString();
+        //pText.text = points.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,8 +25,22 @@ public class PointCircle_Controller : MonoBehaviour
         if (other.CompareTag("Airplane"))
         {
             points++;
+            Debug.Log(points);
+            pCircle.SetActive(false);
+        }
+
+        Hud_Controller.AddScore(points);
+    }
+
+
+/*    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Airplane"))
+        {
+            points++;
             Hud_Controller.AddScore(points);
             Debug.Log(points);
+            pCircle.SetActive(false);
         }
-    }
+    }*/
 }
