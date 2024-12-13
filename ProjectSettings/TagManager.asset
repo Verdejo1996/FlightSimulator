@@ -9,6 +9,8 @@ TagManager:
   - Airplane
   - Fuel
   - WindArea
+  - dataCollector
+  - Drone
   layers:
   - Default
   - TransparentFX

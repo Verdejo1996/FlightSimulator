@@ -375,7 +375,7 @@ public class AirPlane_Controller : MonoBehaviour
         {
             isGrounded = true;
         }
-        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "EndMap")
+        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "EndMap" || collision.gameObject.tag == "Drone")
         {
             isGrounded = true;
             glideRate = 0;

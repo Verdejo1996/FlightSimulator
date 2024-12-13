@@ -23,7 +23,16 @@ public class Game_Controller : MonoBehaviour
     void Update()
     {
         WinCondition();
+
         if (SceneManager.GetActiveScene().name == "NivelTutorial")
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                StartCoroutine(NextLevelAfterDelay(1.0f));
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Nivel1")
         {
             if (Input.GetKeyDown(KeyCode.N))
             {
@@ -39,6 +48,26 @@ public class Game_Controller : MonoBehaviour
             if (airplane != null)
             {
                 if(landedCount == 1)
+                {
+                    winText.gameObject.SetActive(true);
+                    win = true;
+                    Hud_Controller.gameEnd = true;
+                    OnGameOver();
+                }
+            }
+            else
+            {
+                loseText.gameObject.SetActive(true);
+                Hud_Controller.gameEnd = true;
+                OnGameOver();
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Nivel2")
+        {
+            if (airplane != null)
+            {
+                if (landedCount == 1)
                 {
                     winText.gameObject.SetActive(true);
                     win = true;
@@ -72,9 +101,18 @@ public class Game_Controller : MonoBehaviour
 
     IEnumerator NextLevelAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("Nivel1"); ;
+        if (SceneManager.GetActiveScene().name == "NivelTutorial")
+        {
+            yield return new WaitForSeconds(delay);
+            SceneManager.LoadScene("Nivel1");
+        }
+        else
+        {
+            yield return new WaitForSeconds(delay);
+            SceneManager.LoadScene("Nivel2");
+        }
     }
+
 
     private void OnGameOver()
     {
